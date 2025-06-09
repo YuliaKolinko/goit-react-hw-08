@@ -1,24 +1,26 @@
-// import { useEffect } from "react";
-import css from "./App.module.css";
-// import ContactForm from "./components/ContactForm/ContactForm";
-// import ContactList from "./components/ContactList/ContactList";
-// import SearchBox from "./components/SearchBox/SearchBox";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchContacts } from "./redux/contactsOps";
-// import Error from "./components/Error/Error";
-// import Loader from "./components/Loader/Loader";
-import { lazy, Suspense } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Loyaut from "./components/Layout/Layout";
+import Layout from "./components/Layout/Layout";
+import { refreshUser } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const RegistrationPage = lazy(() =>
-  import("./pages/RegistrationPage/RegistrationPage")
+  import("./pages/RegisterPage/RegisterPage")
 );
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
 
 export default function App() {
-  return (
+  const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+  return isRefreshing ? (
+    <strong>Refreshing user...</strong>
+  ) : (
     <Layout>
       <Suspense fallback={null}>
         <Routes>
