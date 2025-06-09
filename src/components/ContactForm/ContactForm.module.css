@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+  border: 2px solid #ffd400;
+  border-radius: 20px;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: #f1e9da;
+  color: #541388;
+}
+.button {
+  width: 160px;
+  padding: 8px 16px;
+  background-color: #ffd400;
+  color: #541388;
+  border-color: #2e294e;
+}
+.input {
+  width: 100%;
+}
+.label {
+  align-self: flex-start;
+}
