@@ -15,7 +15,9 @@ export default function HomePage() {
           </>
         ) : (
           <>
-            <span>Welcome to the Phonebook App</span>
+            <span className={css.welcomeMessage}>
+              Welcome to the Phonebook App
+            </span>
           </>
         )}
       </h2>

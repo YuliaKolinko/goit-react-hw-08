@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1e9da;
+  margin: 20px auto;
+  gap: 12px;
+  width: 520px;
+  border: 2px solid #ffd400;
+  border-radius: 20px;
+  padding: 15px;
+  align-items: center;
+  margin-bottom: 20px;
+  align-content: space-between;
+  color: #541388;
+  justify-content: space-between;
+}

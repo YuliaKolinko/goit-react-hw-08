@@ -1,0 +1,15 @@
+.navigation {
+  background-color: #f1e9da;
+  width: 220px;
+  display: flex;
+}
+css.link {
+  color: #541388;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 30px;
+}
+.activeLink {
+  color: #0d6639;
+  text-decoration: underline;
+}
