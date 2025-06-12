@@ -1,27 +1,28 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "../../redux/contacts/operations";
-import { isSelectLoading } from "../../redux/contacts/selectors";
-import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import css from "./ContactPage.module.css";
 
 export default function ContactPage() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(isLoading);
+  const loading = useSelector((state) => state.contacts.loading);
+  const error = useSelector((state) => state.contacts.error);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
   return (
-    <>
-      <PageTitle>Contacts</PageTitle>
-      <ContactForm />
-      <div>
-        {" "}
-        {isLoading && "Request in progress..."}
-        {error && <Error>Error message</Error>}
-      </div>
-      <ContactList />
-    </>
+    <div className={css.container}>
+      <h3>Create new contact</h3>
+      <main className={css.main}>
+        <h1>Phonebook</h1>
+        <SearchBox />
+        {loading && <p>Loading contacts...</p>}
+        {error && <p>Error: {error}</p>}
+        <ContactList />
+      </main>
+    </div>
   );
 }

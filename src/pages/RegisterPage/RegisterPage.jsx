@@ -1,5 +1,5 @@
-import PageTitle from "../../components/PageTitle/PageTitle";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 export default function RegisterPage() {
   return (

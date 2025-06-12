@@ -1,7 +1,14 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, deleteContacts, addContacts } from "./contactsOps";
-import { selectNameFilter } from "./filtersSlice";
-const contactsSlice = createSlice({
+import { createSlice } from "@reduxjs/toolkit";
+import {
+  fetchContacts,
+  deleteContacts,
+  addContacts,
+  editContact,
+} from "../contacts/operations";
+
+import { logOut } from "../auth/operations";
+
+const slice = createSlice({
   name: "contacts",
   initialState: {
     items: [],
@@ -9,7 +16,7 @@ const contactsSlice = createSlice({
     error: false,
   },
 
-  extraReducers: (builder) => {
+  extraReducers: (builder) =>
     builder
       .addCase(fetchContacts.pending, (state) => {
         state.loading = true;
@@ -41,19 +48,28 @@ const contactsSlice = createSlice({
       .addCase(addContacts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
-  },
+      })
+      .addCase(editContact.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(editContact.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (contact) => contact.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+      .addCase(editContact.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.loading = false;
+        state.error = false;
+      }),
 });
 
-export default contactsSlice.reducer;
-export const selectContacts = (state) => state.contacts.items;
-
-export const selectFiltredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (contacts, filter) => {
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(normalizedFilter)
-    );
-  }
-);
+export default slice.reducer;

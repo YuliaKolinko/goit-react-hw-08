@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { setAuthHeader } from "../auth/operations";
 
 axios.defaults.baseURL = "https://connections-api.goit.global/";
 
@@ -32,6 +33,22 @@ export const addContacts = createAsyncThunk(
   async (newContact, thunkAPI) => {
     try {
       const response = await axios.post("/contacts", newContact);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editContact = createAsyncThunk(
+  "contacts/editContact",
+  async ({ id, updatedData }, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      if (!token) throw new Error("No token");
+      setAuthHeader(`Bearer ${token}`);
+      const response = await axios.patch(`/contacts/${id}`, updatedData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
