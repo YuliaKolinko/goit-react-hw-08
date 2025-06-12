@@ -1,6 +1,6 @@
 import css from "./Header.module.css";
 import Navigation from "../Navigation/Navigation";
-import UserMenu from "../UserMenu/UserMenu";
+import UserMemu from "../UserMemu/UserMemu";
 import AuthNav from "../AuthNav/AuthNav";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className={css.header}>
       <Navigation />
-      {isLoggedIn ? <UserMenu /> : <AuthNav />}
+      {isLoggedIn ? <UserMemu /> : <AuthNav />}
     </header>
   );
 }

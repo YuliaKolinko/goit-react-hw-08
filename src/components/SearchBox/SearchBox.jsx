@@ -1,6 +1,6 @@
 import css from "./SearchBox.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { filterSlice } from "../../redux/filtersSlice";
+import { filterSlice } from "../../redux/filtres/slice";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 export default function SearchBox() {
