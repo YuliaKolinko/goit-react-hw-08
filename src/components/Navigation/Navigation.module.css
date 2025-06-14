@@ -2,8 +2,10 @@
   background-color: #f1e9da;
   width: 220px;
   display: flex;
+  margin: 20px auto;
+  justify-content: center;
 }
-css.link {
+.link {
   color: #541388;
   text-decoration: none;
   font-weight: 600;
@@ -12,4 +14,7 @@ css.link {
 .activeLink {
   color: #0d6639;
   text-decoration: underline;
+  font-size: 30px;
+  text-decoration: none;
+  justify-content: center;
 }

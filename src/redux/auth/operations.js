@@ -52,7 +52,7 @@ export const refreshUser = createAsyncThunk(
   {
     condition: (_, { thunkAPI }) => {
       const reduxState = thunkAPI.getState();
-      return reduxState.auth.token !== null && !reduxState.auth.isRefreshing;
+      return reduxState.auth.token !== null;
     },
   }
 );
